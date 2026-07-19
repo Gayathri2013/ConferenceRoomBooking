@@ -4,7 +4,7 @@ import os
 
 db = SQLAlchemy()
 
-def create_app():
+def create_app(test_config=None):
     """Create and configure the Flask application instance.
 
     Application factory that instantiates the Flask app, points
@@ -13,7 +13,12 @@ def create_app():
     all database tables if they do not already exist.
 
     Args:
-        None
+        test_config (dict, optional): Config overrides applied on top
+            of the defaults before the database is initialized — e.g.
+            ``{'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:'}`` to
+            point the app at an in-memory database for tests instead
+            of the real ``db/bookings.db`` file. Defaults to ``None``
+            (no overrides).
 
     Returns:
         flask.Flask: A fully configured Flask application instance,
@@ -26,10 +31,10 @@ def create_app():
             app = create_app()
             app.run(debug=True)
 
-        Example 2 - create the app for use in a test client::
+        Example 2 - create an app backed by an in-memory database for tests::
 
             from app import create_app
-            app = create_app()
+            app = create_app(test_config={'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:'})
             client = app.test_client()
             response = client.get('/health')
 
@@ -42,6 +47,9 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, 'db', 'bookings.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = 'workshop-secret-key'
+
+    if test_config:
+        app.config.update(test_config)
 
     db.init_app(app)
 
