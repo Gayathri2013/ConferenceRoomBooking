@@ -17,7 +17,36 @@ def check_overlap(room_id, start_time, end_time, exclude_id=None):
         exclude_id:  Optional booking ID to ignore (used during rescheduling)
 
     Returns:
-        True if an overlap exists, False if the slot is free
+        bool: True if an overlap exists, False if the slot is free.
+
+    Examples:
+        Example 1 - checking a new booking before creation::
+
+            from datetime import datetime
+            from utils.conflict import check_overlap
+
+            has_conflict = check_overlap(
+                room_id=1,
+                start_time=datetime(2026, 7, 20, 9, 0),
+                end_time=datetime(2026, 7, 20, 9, 30)
+            )
+            if has_conflict:
+                print("Room is already booked for that slot")
+
+        Example 2 - checking a reschedule, excluding the booking itself::
+
+            has_conflict = check_overlap(
+                room_id=1,
+                start_time=datetime(2026, 7, 20, 10, 0),
+                end_time=datetime(2026, 7, 20, 10, 30),
+                exclude_id=5
+            )
+
+    Note:
+        This is an internal helper function, not an HTTP route — it
+        has no browser or curl equivalent. It is called by
+        :func:`routes.bookings.create_booking` and
+        :func:`routes.bookings.reschedule_booking`.
     """
     query = Booking.query.filter(
         Booking.room_id == room_id,

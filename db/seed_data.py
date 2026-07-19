@@ -11,6 +11,34 @@ from models import ConferenceRoom, Employee, Booking
 from datetime import datetime, timedelta
 
 def seed():
+    """Reset the database and populate it with sample workshop data.
+
+    Drops all existing tables, recreates the schema, and inserts a
+    fixed set of 5 conference rooms, 10 employees, and 20 sample
+    bookings for use in the workshop/demo.
+
+    Args:
+        None
+
+    Returns:
+        None. Prints a confirmation summary to stdout on completion.
+
+    Examples:
+        Example 1 - run as a script from the project root::
+
+            python db/seed_data.py
+
+        Example 2 - call programmatically::
+
+            from db.seed_data import seed
+            seed()
+
+    Note:
+        This is a standalone Python utility, not an HTTP route — it
+        has no browser or curl equivalent. It is destructive: it
+        drops all tables (``db.drop_all()``) before reseeding, so any
+        existing data will be lost.
+    """
     app = create_app()
     with app.app_context():
         db.drop_all()
