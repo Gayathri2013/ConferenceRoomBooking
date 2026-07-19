@@ -18,3 +18,10 @@ Claude Terminal
     2. What API Routes are available. Give me an example of each one that I can try in the browser and try using CURL. Give me side by     
         side, the ones that I can copy and paste and use it to test my app.
     3. Run a curl to get me all the bookings for Room no 1
+    4. Can we add a route to list all slots that are available for a particular meeting room. Lets add it and then use curl to check for   
+        available slots for meeting room 1 
+    5. write a google string docstring for all the methods & routes. Include purpose of the method/route, parameters with data types, return value,
+        and two examples to make a call to this method. Also add how would you call this directly from browser & curl
+    6. Based on what you have seen of this code base, write 2 new entries for useful context section of claude.md and add 1new entry for DO Not Touch that isn't already listed.
+        I also want a detail overview of the project and few examples of using it. if there were any good best practices naming conventions that were follwed it can be added to coding conventions.
+    7. Summarize the conventions in claude.md to me in your own words so that i can confirm you are using it correctly.
