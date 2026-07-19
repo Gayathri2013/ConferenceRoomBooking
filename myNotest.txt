@@ -1,0 +1,20 @@
+Flask-Lightweight python web framework used to build web apps & api's
+
+DB-SQLAlchemy
+
+Browser-->Flask-->Validate-->SQLAlchemy stores-->
+
+
+Normal Terminal
+    1. python -m venv venv --> creates virtual env
+    2. .\venv\Scripts\activate --> activate virtual env
+    3. pip install -r .\requirements.txt
+    4. python .\db\seed_data.py
+    5. flask run
+
+Claude Terminal
+    1. Show me the summary of the database schema. For each table in db/bookings.db, list the column names, data types, and constraints.
+        Then show me how many records are in each table.
+    2. What API Routes are available. Give me an example of each one that I can try in the browser and try using CURL. Give me side by     
+        side, the ones that I can copy and paste and use it to test my app.
+    3. Run a curl to get me all the bookings for Room no 1
